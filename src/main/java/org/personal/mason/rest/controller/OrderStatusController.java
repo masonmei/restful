@@ -30,6 +30,10 @@ public class OrderStatusController {
     @Autowired
     private OrderService orderService;
 
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<OrderStatus> getOrderStatus(@PathVariable Serializable id) {
 

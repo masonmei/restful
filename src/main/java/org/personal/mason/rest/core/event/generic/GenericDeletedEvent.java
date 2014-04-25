@@ -11,23 +11,23 @@ import java.io.Serializable;
  * Time: 4:53 PM
  * To change this template use File | Settings | File Templates.
  */
-public class GenericDeletedEvent<T> extends DeletedEvent {
+public class GenericDeletedEvent<T, ID extends Serializable> extends DeletedEvent {
 
-    private Serializable key;
+    private ID key;
     private T object;
     private boolean deletionCompleted;
 
-    private GenericDeletedEvent(Serializable key) {
+    private GenericDeletedEvent(ID key) {
         this.key = key;
     }
 
-    public GenericDeletedEvent(Serializable key, T object) {
+    public GenericDeletedEvent(ID key, T object) {
         this.key = key;
         this.object = object;
         this.deletionCompleted = true;
     }
 
-    public Serializable getKey() {
+    public ID getKey() {
         return key;
     }
 
@@ -39,15 +39,15 @@ public class GenericDeletedEvent<T> extends DeletedEvent {
         return deletionCompleted;
     }
 
-    public static <T> GenericDeletedEvent<T> deletionForbidden(Serializable key, T object){
-        GenericDeletedEvent<T> event = new GenericDeletedEvent<T>(key, object);
+    public static <T, ID extends Serializable> GenericDeletedEvent<T, ID> deletionForbidden(ID key, T object){
+        GenericDeletedEvent<T, ID> event = new GenericDeletedEvent<T, ID>(key, object);
         event.entityFound = true;
         event.deletionCompleted = true;
         return event;
     }
 
-    public static <T> GenericDeletedEvent<T> notFound(Serializable key){
-        GenericDeletedEvent<T> event = new GenericDeletedEvent<T>(key);
+    public static <T, ID extends Serializable> GenericDeletedEvent<T, ID> notFound(ID key){
+        GenericDeletedEvent<T, ID> event = new GenericDeletedEvent<T, ID>(key);
         event.entityFound = false;
         return event;
     }

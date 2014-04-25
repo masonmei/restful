@@ -11,17 +11,17 @@ import java.io.Serializable;
  * Time: 5:07 PM
  * To change this template use File | Settings | File Templates.
  */
-public class GenericUpdatedEvent<T> extends UpdateEvent {
+public class GenericUpdatedEvent<T, ID extends Serializable> extends UpdateEvent {
 
-    private Serializable key;
+    private ID key;
     private T object;
 
-    public GenericUpdatedEvent(Serializable key, T object) {
+    public GenericUpdatedEvent(ID key, T object) {
         this.key = key;
         this.object = object;
     }
 
-    public Serializable getKey() {
+    public ID getKey() {
         return key;
     }
 

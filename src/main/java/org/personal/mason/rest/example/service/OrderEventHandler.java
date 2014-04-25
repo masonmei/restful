@@ -1,9 +1,10 @@
 package org.personal.mason.rest.example.service;
 
 import org.personal.mason.rest.core.event.generic.*;
-import org.personal.mason.rest.domain.OrderStatus;
 import org.personal.mason.rest.example.event.domain.OrderDetails;
 import org.personal.mason.rest.example.model.InternalOrder;
+import org.personal.mason.rest.example.model.OrderStatus;
+import org.personal.mason.rest.example.model.OrderStatusDetails;
 import org.personal.mason.rest.example.repository.OrdersRepository;
 
 import java.util.ArrayList;
@@ -44,14 +45,14 @@ public class OrderEventHandler implements OrderService {
     }
 
     @Override
-    public GenericReadEvent<OrderStatus> requestOrderStatus(GenericRequestReadEvent<OrderStatus> requestOrderStatusEvent) {
+    public GenericReadEvent<OrderStatusDetails> requestOrderStatus(GenericRequestReadEvent<OrderStatusDetails> requestOrderStatusEvent) {
         InternalOrder order = ordersRepository.findById(requestOrderStatusEvent.getKey());
 
         if (order == null) {
             return GenericReadEvent.notFound(requestOrderStatusEvent.getKey());
         }
 
-        return new GenericReadEvent<OrderStatus>(requestOrderStatusEvent.getKey(), order.getStatus());
+        return new GenericReadEvent<OrderStatusDetails>(requestOrderStatusEvent.getKey(), order.getStatus().toStatusDetails());
     }
 
     @Override

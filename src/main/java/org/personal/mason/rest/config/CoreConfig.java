@@ -6,6 +6,7 @@ import org.personal.mason.rest.example.repository.OrdersRepository;
 import org.personal.mason.rest.example.service.OrderEventHandler;
 import org.personal.mason.rest.example.service.OrderService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -19,11 +20,11 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 
-@Component
+@Configuration
 public class CoreConfig {
 
     @Bean
-    public OrderService createService(OrdersRepository repo) {
+    public OrderService orderService(OrdersRepository repo) {
         return new OrderEventHandler(repo);
     }
 

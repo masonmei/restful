@@ -11,21 +11,21 @@ import java.io.Serializable;
  * Time: 5:02 PM
  * To change this template use File | Settings | File Templates.
  */
-public class GenericReadEvent<T> extends ReadEvent {
+public class GenericReadEvent<T, ID extends Serializable> extends ReadEvent {
 
-    private Serializable key;
+    private ID key;
     private T object;
 
-    private GenericReadEvent(Serializable key) {
+    private GenericReadEvent(ID key) {
         this.key = key;
     }
 
-    public GenericReadEvent(Serializable key, T object) {
+    public GenericReadEvent(ID key, T object) {
         this.key = key;
         this.object = object;
     }
 
-    public Serializable getKey() {
+    public ID getKey() {
         return key;
     }
 
@@ -33,8 +33,8 @@ public class GenericReadEvent<T> extends ReadEvent {
         return object;
     }
 
-    public static <T> GenericReadEvent<T> notFound(Serializable key){
-        GenericReadEvent<T> event = new GenericReadEvent<T>(key);
+    public static <T, ID extends Serializable> GenericReadEvent<T, ID> notFound(ID key){
+        GenericReadEvent<T, ID> event = new GenericReadEvent<T, ID>(key);
         event.entityFound = false;
         return event;
     }

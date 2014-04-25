@@ -11,15 +11,15 @@ import java.io.Serializable;
  * Time: 4:51 PM
  * To change this template use File | Settings | File Templates.
  */
-public class GenericDeleteEvent<T> extends DeleteEvent {
+public class GenericDeleteEvent<ID extends Serializable> extends DeleteEvent {
 
-    private final Serializable key;
+    private final ID key;
 
-    public GenericDeleteEvent(Serializable key) {
+    public GenericDeleteEvent(ID key) {
         this.key = key;
     }
 
-    public Serializable getKey() {
+    public ID getKey() {
         return key;
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/aggregators/orders/{id}/paymentdetails")
 public class OrderPaymentDetailsController {
+
     private OrderService orderService;
 
     public void setOrderService(OrderService orderService) {

@@ -11,15 +11,15 @@ import java.io.Serializable;
  * Time: 5:11 PM
  * To change this template use File | Settings | File Templates.
  */
-public class GenericRequestReadEvent<T> extends RequestReadEvent {
+public class GenericRequestReadEvent<ID extends Serializable> extends RequestReadEvent {
 
-    private Serializable key;
+    private ID key;
 
-    public GenericRequestReadEvent(Serializable key) {
+    public GenericRequestReadEvent(ID key) {
         this.key = key;
     }
 
-    public Serializable getKey() {
+    public ID getKey() {
         return key;
     }
 }
