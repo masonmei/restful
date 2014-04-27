@@ -1,6 +1,7 @@
 package org.personal.mason.rest.core.services;
 
 import org.personal.mason.rest.core.event.generic.*;
+import org.personal.mason.rest.core.event.relation.*;
 
 import java.io.Serializable;
 
@@ -11,16 +12,17 @@ import java.io.Serializable;
  * Time: 5:46 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface GenericRelationService<T, R, ID extends Serializable> {
-    GenericDeletedEvent<R,ID> deleteRelationObject(GenericDeleteEvent<ID> deleteEvent);
+public interface GenericRelationService<T, R, ID extends Serializable, RID extends Serializable> {
 
-    GenericUpdatedEvent<R,ID> partialUpdateRelationObject(GenericUpdateEvent<R, ID> updateEvent);
+    GenericRelationReadEvent<T, R, ID, RID> readRelationObject(GenericRelationRequestReadEvent<T, R, ID, RID> requestReadEvent);
 
-    GenericUpdatedEvent<R,ID> updateRelationObject(GenericUpdateEvent<R, ID> updateEvent);
+    GenericRelationReadAllEvent<T,R,ID> readAllRelationObjects(GenericRelationRequestReadAllEvent<T, R, ID> requestReadAllEvent);
 
-    GenericCreatedEvent<R,ID> createRelationObject(GenericCreateEvent<R> createEvent);
+    GenericRelationCreatedEvent<T,R,ID,RID> createRelationObject(GenericRelationCreateEvent<T, R, ID> createEvent);
 
-    GenericReadAllEvent<R> readAllRelationObjects(GenericRequestReadAllEvent readAllEvent);
+    GenericRelationUpdatedEvent<T,R,ID,RID> updateRelationObject(GenericRelationUpdateEvent<T, R, ID, RID> updateEvent);
 
-    GenericReadEvent<R,ID> readRelationObject(GenericRequestReadEvent<ID> readEvent);
+    GenericRelationUpdatedEvent<T,R,ID,RID> partialUpdateRelationObject(GenericRelationUpdateEvent<T, R, ID, RID> updateEvent);
+
+    GenericRelationDeletedEvent<T,R,ID,RID> deleteRelationObject(GenericRelationDeleteEvent<T, R, ID, RID> deleteEvent);
 }
